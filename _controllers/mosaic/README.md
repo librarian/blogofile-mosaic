@@ -26,9 +26,11 @@ Images go in _photos by default. You can also have comments in this folder -- fo
 Installation Without Git
 ---------------------------
 Copy the following from here:
+
 	\_controllers/mosaic/\_\_init\_\_.py
 	\_templates/mosaic\_directory.mako
 	\_templates/mosaic\_photo.mako
+	
 into the appropriate directories in your blogofile root.
 
 Add the following lines to you config:
