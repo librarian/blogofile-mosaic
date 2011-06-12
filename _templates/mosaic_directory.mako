@@ -1,7 +1,7 @@
 <%inherit file="_templates/site.mako" />
-My Photos:
-<ul>
+<br>
+<center>
 % for photo in photos:
-	<li><a href="${photo}.html">${photo}</a></li>
+	<a href="${photo}.html"><img src="small/${photo}"</a>
 % endfor
-</ul>
+</center>

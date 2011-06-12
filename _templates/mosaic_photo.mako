@@ -1,2 +1,4 @@
 <%inherit file="_templates/site.mako" />
-<img src="${photo}">
+<center>
+<a href="${photo}"><img src="large/${photo}"></a>
+</center>
