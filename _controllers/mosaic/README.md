@@ -27,9 +27,9 @@ Installation Without Git
 ---------------------------
 Copy the following from here:
 
-	\_controllers/mosaic/\_\_init\_\_.py
-	\_templates/mosaic\_directory.mako
-	\_templates/mosaic\_photo.mako
+	_controllers/mosaic/__init__.py
+	_templates/mosaic_directory.mako
+	_templates/mosaic_photo.mako
 	
 into the appropriate directories in your blogofile root.
 
