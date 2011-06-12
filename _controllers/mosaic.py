@@ -1,5 +1,4 @@
-import os
-import shutil
+import os, shutil
 from PIL import Image
 from blogofile.cache import bf
 
@@ -48,7 +47,16 @@ def read_photos(directory):
 def photo_pages(photos):
 	for photo in photos:
 		bf.writer.materialize_template("mosaic_photo.mako",(config['path'],photo+".html"), 
-			{"photo":photo})
+			{"photo":photo, "caption":caption(photo)})
+
+def caption(photo):
+	for f in os.listdir(config['dir']):
+		if f.startswith(photo + "."):
+			file_extension = os.path.splitext(f)[-1][1:]
+			contents 	= open(os.path.join(config['dir'], f), 'r').read()
+			filters 	= bf.config.controllers.blog.post_default_filters[file_extension]
+			filtered	= bf.filter.run_chain(filters, contents)
+			return filtered
 
 def index(photos):
 	bf.writer.materialize_template("mosaic_directory.mako",(config['path'],"index.html"), 
