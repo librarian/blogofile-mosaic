@@ -15,24 +15,28 @@ config = {
 		}
 
 def run():
-	os.mkdir(os.path.join("_site", config['path']))
-	photos	= read_photos(config['dir'])
-	copy(photos)
-	resize(photos, config['small'], "small")
-	resize(photos, config['large'], "large")
-	index(photos)
-	photo_pages(photos)
+	directory(config['dir'], config['path'])
 
-def copy(photos):
-	for photo in photos:
-		shutil.copy2(os.path.join(config['dir'], photo), os.path.join("_site",config['path'],photo))
 
-def resize(photos, size, destination):
-	os.mkdir(os.path.join("_site", config['path'], destination))
+def directory(source, destination):
+	both = os.path.join("_site", destination)
+	os.mkdir(both)
+	photos	= read_photos(source)
+	copy(photos, source, both)
+	resize(photos, both, "small", config['small'])
+	resize(photos, both, "large", config['large'],)
+	index(photos, destination)
+	photo_pages(photos, destination, source)
+
+def copy(photos, source, destination):
 	for photo in photos:
-		original	= os.path.join(config['dir'], photo)
-		to			= os.path.join("_site", config['path'], destination, photo)
-		file, ext 	= os.path.splitext(original)
+		shutil.copy2(os.path.join(source, photo), os.path.join(destination,photo))
+
+def resize(photos, destination, subfolder, size):
+	os.mkdir(os.path.join(destination, subfolder))
+	for photo in photos:
+		original	= os.path.join(destination, photo)
+		to			= os.path.join(destination, subfolder, photo)
 		im 			= Image.open(original)
 		im.thumbnail(size, Image.ANTIALIAS)
 		im.save(to)
@@ -44,13 +48,16 @@ def read_photos(directory):
 			photos.append(p)
 	return photos
 
-def photo_pages(photos):
+def photo_pages(photos, destination, source):
 	for photo in photos:
-		bf.writer.materialize_template("mosaic_photo.mako",(config['path'],photo+".html"), 
-			{"photo":photo, "caption":caption(photo)})
+		bf.writer.materialize_template(
+			"mosaic_photo.mako",
+			(destination, photo+".html"), 
+			{"photo":photo, "caption":caption(source, photo)}
+		)
 
-def caption(photo):
-	for f in os.listdir(config['dir']):
+def caption(source, photo):
+	for f in os.listdir(source):
 		if f.startswith(photo + "."):
 			file_extension = os.path.splitext(f)[-1][1:]
 			contents 	= open(os.path.join(config['dir'], f), 'r').read()
@@ -58,6 +65,9 @@ def caption(photo):
 			filtered	= bf.filter.run_chain(filters, contents)
 			return filtered
 
-def index(photos):
-	bf.writer.materialize_template("mosaic_directory.mako",(config['path'],"index.html"), 
-		{"photos":photos})
+def index(photos, destination):
+	bf.writer.materialize_template(
+		"mosaic_directory.mako",
+		(destination,"index.html"), 
+		{"photos":photos}
+	)
