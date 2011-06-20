@@ -21,7 +21,7 @@ You can also change, for example, the size of the thumbnails on your index page:
 
 	mosaic.small			= (150, 150)
 	
-Images go in _photos by default. You can also have comments in this folder -- for example: if you had a photo called pegasus.jpg, you can have a comment saved as pegasus.jpg.markdown.
+Images go in _photos by default. You can also have comments in this folder -- for example: if you had a photo called pegasus.jpg, you can have a comment saved as pegasus.jpg.markdown. You can have subdirectories, too, and the first photo alphabetically will be the "cover" for the subdirectory.
 
 Installation Without Git
 ---------------------------
@@ -43,4 +43,4 @@ You can also change, for example, the size of the thumbnails on your index page:
 
 	mosaic.small			= (150, 150)
 	
-Images go in _photos by default. You can also have comments in this folder -- for example: if you had a photo called pegasus.jpg, you can have a comment saved as pegasus.jpg.markdown.
+Images go in _photos by default. You can also have comments in this folder -- for example: if you had a photo called pegasus.jpg, you can have a comment saved as pegasus.jpg.markdown. You can have subdirectories, too, and the first photo alphabetically will be the "cover" for the subdirectory.
