@@ -2,9 +2,9 @@
 <br>
 <center>
 % for d in directories:
-	<a href="${d}/"><img src="${d}/index.jpg"></a>
+	<a href="/${destination}/${d}/"><img src="/${destination}/${d}/index.jpg"></a>
 % endfor
 % for photo in photos:
-	<a href="${photo}.html"><img src="small/${photo}"</a>
+	<a href="/${destination}/${photo}.html"><img src="/${destination}/small/${photo}"</a>
 % endfor
 </center>

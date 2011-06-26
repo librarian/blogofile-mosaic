@@ -78,7 +78,7 @@ def photo_pages(photos, destination, source):
 		bf.writer.materialize_template(
 			"mosaic_photo.mako",
 			(destination, photo+".html"), 
-			{"photo":photo, "caption":caption(source, photo)}
+			{"photo":photo, "caption":caption(source, photo),"destination":destination}
 		)
 
 def caption(source, photo):
@@ -94,5 +94,5 @@ def index(photos, destination, directories):
 	bf.writer.materialize_template(
 		"mosaic_directory.mako",
 		(destination,"index.html"), 
-		{"photos":photos, "directories":directories}
+		{"photos":photos, "directories":directories, "destination": destination}
 	)
